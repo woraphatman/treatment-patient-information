@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Encounter {
+  encounterId         Int       @id @default(autoincrement())
+  visit               DateTime
+  discharge           DateTime
+  physicalExamination String    @db.LongText
+  historyOfIllness    String    @db.LongText
+  followUp            DateTime  @db.Date
+  patient             Patient   @relation(fields: [patientId], references: [patientId])
+  patientId           Int       @unique
+  deleted             Boolean   @default(false)
+  deletedAt           DateTime?
+}
+
+model Patient {
+  patientId  Int         @id @default(autoincrement())
+  firstName  String
+  middleName String?
+  lastName   String
+  birthDate  DateTime    @db.Date
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  deletedAt  DateTime?
+  deleted    Boolean    @default(false)
+  encounters Encounter[]
+}
