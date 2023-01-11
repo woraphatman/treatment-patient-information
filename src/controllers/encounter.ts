@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 prisma.$use(async (params, next) => {
-  if (params.model == "Encounter" && params.action == "update") {
+  if (params.model == "Encounter" && params.action == "updateMany") {
     params.action = "update";
     params.args["data"] = { deletedAt: null, deleted: false };
   }
@@ -114,6 +114,21 @@ export async function encounterUpdate(req: Request, res: Response) {
     }
   }
 }
+
+export async function encounterRestore(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+       await prisma.encounter.updateMany({
+        where: { encounterId: Number(id) },
+        data: {}
+      });
+      res.status(200).json("restore succeed");
+    } catch (err) {
+      if (err instanceof Error) {
+        res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      }
+    }
+  }
 
 export async function encounterHardDelete(req: Request, res: Response) {
   const { id } = req.params;

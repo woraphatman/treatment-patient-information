@@ -3,18 +3,17 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 prisma.$use(async (params, next) => {
-  if (params.model == "Patient" && params.action == "update") {
+  if (params.model == "Patient" && params.action == "updateMany") {
     params.action = "update";
-    params.args["data"] = { deletedAt: null ,deleted: false}
+    params.args["data"] = { deletedAt: null, deleted: false };
   }
   return next(params);
 });
 
 prisma.$use(async (params, next) => {
- 
   if (params.model == "Patient" && params.action == "delete") {
     params.action = "update";
-    params.args["data"] = { deletedAt: new Date(Date.now()) ,deleted: true};
+    params.args["data"] = { deletedAt: new Date(Date.now()), deleted: true };
   }
   return next(params);
 });
@@ -29,7 +28,6 @@ prisma.$use(async (params, next) => {
     params.args.where["deletedAt"] = null;
   }
   return next(params);
-  
 });
 
 export async function patientGetAll(req: Request, res: Response) {
@@ -51,7 +49,7 @@ export async function patientGetById(req: Request, res: Response) {
   try {
     const payload = await prisma.patient.findUnique({
       where: { patientId: Number(id) },
-      include: { encounters: true }
+      include: { encounters: true },
     });
     res.status(200).json(payload);
   } catch (err) {
@@ -88,7 +86,6 @@ export async function patientUpdate(req: Request, res: Response) {
     const body = await prisma.patient.findUnique({
       where: { patientId: Number(id) },
     });
-
     const user = {
       firstName: firstName ?? body?.firstName,
       middleName: middleName ?? body?.middleName,
@@ -110,6 +107,21 @@ export async function patientUpdate(req: Request, res: Response) {
   }
 }
 
+export async function patientRestore(req: Request, res: Response) {
+  const { id } = req.params;
+  try {
+     await prisma.patient.updateMany({
+      where: { patientId: Number(id) },
+      data: {}
+    });
+    res.status(200).json("restore succeed");
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+    }
+  }
+}
+
 export async function patientHardDelete(req: Request, res: Response) {
   const { id } = req.params;
   try {
@@ -123,4 +135,3 @@ export async function patientHardDelete(req: Request, res: Response) {
     }
   }
 }
-

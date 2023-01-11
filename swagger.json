@@ -1,0 +1,425 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Sati test API",
+        "version": "1.0.0",
+        "contact": {
+            "email": "woraphatman@hotmail.com"
+        }
+    },
+    "paths": {
+        "/patient": {
+            "get": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Get all patients",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient/{id}": {
+            "get": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": " Get patient by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "404": {
+                        "description": "patients not found"
+                    }
+                }
+            }
+        },
+        "/patient/create": {
+            "post": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Create a new patient",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Patient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/patient/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "restore patient by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "404": {
+                        "description": "patients not found"
+                    }
+                }
+            }
+        },
+        "/patient/update/{id}": {
+            "put": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Update patient by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Patient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "404": {
+                        "description": "patients not found"
+                    }
+                }
+            }
+        },
+        "patient/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": " delete patient by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Patient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    },
+                    "404": {
+                        "description": "patient not found"
+                    }
+                }
+            }
+        },
+        "/encounter": {
+            "get": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": "Get all encounter",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    }
+                }
+            }
+        },
+        "/encounter/{id}": {
+            "get": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": " Get encounter by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    },
+                    "404": {
+                        "description": "encounter not found"
+                    }
+                }
+            }
+        },
+        "/Encounter/create": {
+            "post": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": "Create a new encounter",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Encounter"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "encounter/restore/{id}": {
+            "delete": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": "Admin restore encounter by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    },
+                    "404": {
+                        "description": "encounter not found"
+                    }  
+                }
+            }
+        },
+        "/encounter/update/{id}": {
+            "put": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": "Update encounter by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Encounter"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    },
+                    "404": {
+                        "description": "encounter not found"
+                    }
+                }
+            }
+        },
+        "encounter/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Encounter"
+                ],
+                "summary": "Admin delete encounter by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Encounter"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Encounter"
+                        }
+                    },
+                    "404": {
+                        "description": "encounter not found"
+                    }  
+                }
+            }
+        }
+    },
+    "definitions": {
+        "securitySchemes": {
+            "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer"
+            }
+          },
+        "Patient": {
+            "required": [
+                "firstName",
+                "lastName",
+                "birthDate"
+            ],
+            "properties": {
+                "firstName": {
+                    "type": "string "
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string "
+                }
+            }
+        },
+        "Encounter": {
+            "required": [
+                "visit",
+                "discharge",
+                "physicalExamination",
+                "historyOfIllness",
+                "followUp"
+            ],
+            "properties": {
+                "visit": {
+                    "type": "string"
+                },
+                "discharge": {
+                    "type": "string"
+                },
+                "physicalExamination": {
+                    "type": "string"
+                },
+                "historyOfIllness": {
+                    "type": "string"
+                },
+                "followUp": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -6,4 +6,5 @@ const router = express.Router();
 router.use("/patient", patientRouter);
 router.use("/encounter", encounterRouter);
 
+
 export default router;

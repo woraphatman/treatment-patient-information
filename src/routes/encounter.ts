@@ -1,5 +1,5 @@
 import express from "express";
-import { encounterGetAll, encounterGetById, encounterCreate, encounterUpdate, encounterHardDelete } from "../controllers/encounter";
+import { encounterGetAll, encounterGetById, encounterCreate, encounterUpdate, encounterHardDelete, encounterRestore } from "../controllers/encounter";
 
 
 const router = express.Router();
@@ -8,10 +8,12 @@ const encounterRouter = express.Router();
 encounterRouter.get("", encounterGetAll);
 encounterRouter.get("/:id", encounterGetById);
 
-encounterRouter.post("", encounterCreate);
-encounterRouter.put("/:id", encounterUpdate);
+encounterRouter.post("create", encounterCreate);
 
-encounterRouter.delete("/:id", encounterHardDelete);
+encounterRouter.put("restore/:id", encounterRestore);
+encounterRouter.put("update/:id", encounterUpdate);
+
+encounterRouter.delete("delete/:id", encounterHardDelete);
 router.use(encounterRouter);
 
 export default router;
