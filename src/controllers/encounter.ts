@@ -51,7 +51,7 @@ export async function encounterGetById(req: Request, res: Response) {
     res.status(200).json(payload);
   } catch (err) {
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }
@@ -80,7 +80,7 @@ export async function encounterCreate(req: Request, res: Response) {
   } catch (err) {
   
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice( -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }
@@ -110,7 +110,7 @@ export async function encounterUpdate(req: Request, res: Response) {
   } catch (err) {
     console.log(err);
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message});
     }
   }
 }
@@ -125,7 +125,7 @@ export async function encounterRestore(req: Request, res: Response) {
       res.status(200).json("restore succeed");
     } catch (err) {
       if (err instanceof Error) {
-        res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+        res.status(500).json({ message: err.message });
       }
     }
   }
@@ -139,7 +139,7 @@ export async function encounterHardDelete(req: Request, res: Response) {
     res.status(200).json("delete succeed");
   } catch (err) {
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }

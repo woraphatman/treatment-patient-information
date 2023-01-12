@@ -102,7 +102,7 @@ export async function patientUpdate(req: Request, res: Response) {
   } catch (err) {
     console.log(err);
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }
@@ -110,14 +110,14 @@ export async function patientUpdate(req: Request, res: Response) {
 export async function patientRestore(req: Request, res: Response) {
   const { id } = req.params;
   try {
-     await prisma.patient.updateMany({
+    await prisma.patient.updateMany({
       where: { patientId: Number(id) },
-      data: {}
+      data: {},
     });
     res.status(200).json("restore succeed");
   } catch (err) {
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }
@@ -131,7 +131,7 @@ export async function patientHardDelete(req: Request, res: Response) {
     res.status(200).json("delete succeed");
   } catch (err) {
     if (err instanceof Error) {
-      res.status(500).json({ message: err.message.split(".").slice(-2, -1) });
+      res.status(500).json({ message: err.message });
     }
   }
 }
